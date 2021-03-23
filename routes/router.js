@@ -1,1 +1,12 @@
-//2021.03.23 T전화 연동 버전 개발
+const express = require('express');
+const router = express.Router();
+const app = require('../core');
+
+router.post("/common_start", app);
+router.post("/openQuiz", app);
+router.post("/answerQuiz", app);
+router.post("/quiz_sound", app);
+router.post("/repeat_answerstate", app);
+router.post("/default_finished", app);
+
+module.exports = router;
