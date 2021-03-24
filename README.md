@@ -22,7 +22,7 @@ T전화로 서비스 확장 요청을 받아 Display interface기능을 업데�
 
 ### Intent
 
-![image-20210323142244069](/Users/kkdung/develope/git/todayquiz-server/img/image-20210323142244069.png)
+![image-20210323142244069](./img/image-20210323142244069.png)
 
 
 

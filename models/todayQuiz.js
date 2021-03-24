@@ -37,11 +37,11 @@ try {
 module.exports = class todayQuiz{
     constructor() {
         
-        if(today_cell["OPENMENT"]===undefined){ 
+        if(today_cell["OPENMENT"]===undefined) { 
             today_cell["OPENMENT"]=""
         }
 
-        if(today_cell["SOUND_COMMENT"]===undefined){
+        if(today_cell["SOUND_COMMENT"]===undefined) {
             today_cell["SOUND_COMMENT"]="" 
         }
 
