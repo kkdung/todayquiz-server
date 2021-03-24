@@ -1,8 +1,8 @@
 ---
-
+typora-root-url: ../todayquiz-server
 ---
 
-# 오늘의 퀴즈 - Display(21.03.23)
+# 오늘의 퀴즈 - Display.ver(21.03.23)
 
 
 
@@ -14,7 +14,7 @@ SKT NUGU Play로 서비스 중인 오늘의 퀴즈 Display버전입니다.
 
 T전화로 서비스 확장 요청을 받아 Display interface기능을 업데이트했습니다.  
 
- T전화에서는 처음으로 제공되는 3rd party Play입니다.
+T전화에서는 처음으로 제공되는 3rd party Play입니다.
 
 
 
@@ -38,7 +38,7 @@ T전화로 서비스 확장 요청을 받아 Display interface기능을 업데�
 
 ### Action
 
-![image-20210323142558369](/Users/kkdung/develope/git/todayquiz-server/img/image-20210323142558369.png)
+![image-20210323142558369](./img/image-20210323142558369.png)
 
 서버와 요청을 주고받는 Action은 개별로 처리를 해줘야한다. 오늘의 퀴즈 Play는 Audio를 사용해 로직을 진행하기 때문에 플랫폼에서 제공하는 Audio관련 이벤트를 처리해주는 Action이 추가로 작성되었습니다.
 
