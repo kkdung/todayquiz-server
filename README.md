@@ -89,6 +89,36 @@ NUGU의 Post요청을 구분해 경로를 지정하는 라우터 코드입니다
 
 요청에는 Requset Body에 JSON형식으로 요청 관련된 데이터가 서버로 요청됩니다. 그럼 백엔드 서버에서는 해당 요청을 처리해 Response를 만들어 응답해야합니다.
 
+```javascript
+module.exports = (req, res) => {
+  	//NUGU Request 파싱(Required)
+    req.nugu = {
+        version : req.body.version,
+        actionName : req.body.action.actionName,
+        parameters : req.body.action.parameters,
+        event : req.body.event,
+        context : req.body.context,
+        accessToken : req.body.context.session.accessToken,
+        sessionId : req.body.context.session.id,
+        isNew : req.body.context.session.isNew,
+        isPlayBuilderRequest : req.body.context.session.isPlayBuilderRequest,
+        deviceType : req.body.context.device.type,
+        deviceState : req.body.context.device.state,
+    }
+  
+    //NUGU 추가 인터페이스 Req 파싱(Optional)
+    if (Object.keys(req.body.context.supportedInterfaces).length !== 0) {    
+        audioPlayer = req.body.context.supportedInterfaces.AudioPlayer
+        //req.audioPlayer에 추가한다.
+        req.nugu.audioPlayer = {
+            audioPlayerActivity : audioPlayer.playerActivity,
+            audioToken : audioPlayer.token,
+            audioOffsetInMilliseconds : audioPlayer.offsetInMilliseconds
+        } 
+    }
+}
+```
+
 
 
 

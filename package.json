@@ -18,6 +18,8 @@
   "homepage": "https://github.com/kkdung/todayquiz-server#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "xlsx": "^0.16.9"
   }
 }

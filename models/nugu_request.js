@@ -15,7 +15,6 @@ module.exports = (version) => {
     }
 }
 
-인터넷이 끊기누!
 res.json(nugu.response)
 res.send('string');
 
