@@ -34,9 +34,9 @@ try {
     throw e;
 }
 
-module.exports = class todayQuiz{
+module.exports = class TodayQuiz{
     constructor() {
-        
+
         if(today_cell["OPENMENT"]===undefined) { 
             today_cell["OPENMENT"]=""
         }
@@ -45,7 +45,6 @@ module.exports = class todayQuiz{
             today_cell["SOUND_COMMENT"]="" 
         }
 
-        this.opement = today_cell["OPENMENT"]
         this.opement = today_cell["OPENMENT"]
         this.sound = today_cell["SOUND"]
         this.question = today_cell["QUESTION"]
@@ -58,10 +57,3 @@ module.exports = class todayQuiz{
     }
 
 }
-
-
-    
-
-        
-            
-            

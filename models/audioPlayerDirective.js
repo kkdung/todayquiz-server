@@ -1,4 +1,4 @@
-module.exports = class audioPlayerDirective {
+module.exports = class AudioPlayerDirective {
     constructor() {
         this.type = 'AudioPlayer.Play'
         this.audioItem = {
@@ -16,6 +16,8 @@ module.exports = class audioPlayerDirective {
         }
     }
 
+    // audio.directiveType('type');
+    // audo.directiveType =  'type'; -> set으로 했을경우
     set directiveType(type) {
         this.type = type;
     }
@@ -43,5 +45,4 @@ module.exports = class audioPlayerDirective {
     set directivePreviousToken(previousToken) {
         this.audioItem.stream.expectedPreviousToken = previousToken;
     }
-
 }

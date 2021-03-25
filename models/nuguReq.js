@@ -1,7 +1,5 @@
-module.exports = class nuguReq {
-    
+module.exports = class NuguReq {
     constructor(req) {
-        this.authorization = req.headers.authorization.split(' ')[1];
         this.version = req.body.version;
         this.actionName = req.body.action.actionName;
         this.parameters = req.body.action.parameters;

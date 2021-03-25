@@ -1,21 +1,21 @@
-const nuguReq = require('../models/nuguRes')
-const todayQuiz = require('../models/todayQuiz')
+const nuguReq = require('../models/NuguRes')
+const todayQuiz = require('../models/TodayQuiz')
 
 
 //fix2. nuguRes로 통합작업 필요
-const audioPlayerDirective = require('../models/audioPlayerDirective')
-const displayDirective = require('../models/displayDirective')
+const audioPlayerDirective = require('../models/AudioPlayerDirective')
+const displayDirective = require('../models/DisplayDirective')
 
 async function common_start(nugu) {
     try {
-        todayQuiz = 
-
-
+        todayQuiz = new TodayQuiz();
+        todayQuiz.openment;
 
     } catch (e) {
         throw e;
     }
 }
+
 async function openQuiz(nugu) {
     try {
         const todayQuiz = quiz.today();
@@ -77,9 +77,7 @@ function defaultFinished(nugu) {
 
 }
 
-
 module.exports = (req, res) => {
-
     const nugu = new nuguReq(req);
 
     try {
@@ -99,7 +97,6 @@ module.exports = (req, res) => {
             case 'quiz_sound':
                 quizSound(nugu);
                 break;
-
             case 'default_finished':
                 defaultFinished(nugu);
                 break;

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const app = require('../core');
+const app = require('../services');
 
 router.post("/common_start", app);
 router.post("/openQuiz", app);
