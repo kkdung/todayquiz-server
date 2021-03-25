@@ -13,7 +13,7 @@ app.get('/todayquiz/health', (req, res) => {
     return res.status(200).send('OK');
 });
 
-app.use('/todayquiz', nuguReq, router);
+app.use('/todayquiz', router);
 
 //
 app.use(function (err, req, res, next) {

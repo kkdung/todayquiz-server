@@ -2,7 +2,7 @@
 FullText1을 위한 display DTO
 다 수의 Templet지원하도록 리팩토링 작업 예정
 */
-module.exports = class displayDirective {
+class DisplayDirective {
 
     constructor(version) {
         this.type = "Display.FullText1"
@@ -51,66 +51,92 @@ module.exports = class displayDirective {
 
     }
 
-    set directiveType(type) {
-        this.type = type;
-    }
-    set directiveVersion(version) {
-        this.version = version;
+}
+
+module.exports = class DisplayDirectiveBuilder {
+    constructor() { 
+        displayDirective = new DisplayDirective()
     }
 
-    set directivePlayServiceId(playServiceId) {
-        this.playServiceId = playServiceId;
+    directiveType(type) {
+        this.displayDirective.type = type;
+        return this;
+    }
+    directiveVersion(version) {
+        this.displayDirective.version = version;
+        return this;
     }
 
-    set directiveToken(token) {
-        this.token = token;
+    directivePlayServiceId(playServiceId) {
+        this.displayDirective.playServiceId = playServiceId;
+        return this;
+    }
+
+    directiveToken(token) {
+        this.displayDirective.token = token;
+        return this;
     }
     
-    set directiveDuration(duration) {
-        this.duration = duration;
+    directiveDuration(duration) {
+        this.displayDirective.duration = duration;
+        return this;
     }
 
-    set directiveTitleContentDescription(contentDescription) {
-        this.title.logo.contentDescription = contentDescription;
+    directiveTitleContentDescription(contentDescription) {
+        this.displayDirective.title.logo.contentDescription = contentDescription;
+        return this;
     }
 
-    set directiveTitleUrl(url) {
-        this.title.logo.sources[0].url = url;
+    /*
+    sources 부분 클래스로 분리 필요!!!
+    */
+    directiveTitleUrl(url) {
+        this.displayDirective.title.logo.sources[0].url = url;
+        return this;
     }
     
-    set directiveTitleText(text) {
-        this.title.text.text = text;
+    directiveTitleText(text) {
+        this.displayDirective.title.text.text = text;
+        return this;
     }
 
-    set directiveBackgroundContentDescription(contentDescription) {
-        this.background.image.contentDescription = contentDescription;
+    directiveBackgroundContentDescription(contentDescription) {
+        this.displayDirective.background.image.contentDescription = contentDescription;
+        return this;
     }
 
-    set directiveBackgroundUrl(url) {
-        this.background.image.sources[0].url = url;
+    directiveBackgroundUrl(url) {
+        this.displayDirective.background.image.sources[0].url = url;
+        return this;
     }
     
-    set directiveBackgroundSize(size) {
-        this.background.image.sources[0].size = size;
+    directiveBackgroundSize(size) {
+        this.displayDirective.background.image.sources[0].size = size;
+        return this;
     }
     
-    set directiveBackgroundSize(size) {
-        this.background.image.sources[0].size = size;
+    directiveBackgroundSize(size) {
+        this.displayDirective.background.image.sources[0].size = size;
+        return this;
     }
     
-    set directiveBackgroundColer(color) {
-        this.background.color = color;
+    directiveBackgroundColer(color) {
+        this.displayDirective.background.color = color;
     }
 
-    set directiveContentHearderText(text) {
-        this.content.header.text = text;
+    directiveContentHearderText(text) {
+        this.displayDirective.content.header.text = text;
     }
 
-    set directiveContentBodyText(text) {
-        this.content.body.text = text;
+    directiveContentBodyText(text) {
+        this.displayDirective.content.body.text = text;
     }
 
-    set directiveContentFooterText(text) {
-        this.content.footer.text = text;
-    }    
+    directiveContentFooterText(text) {
+        this.displayDirective.content.footer.text = text;
+    }
+
+    build() {
+        return this.displayDirective;
+    }
 }//end of class

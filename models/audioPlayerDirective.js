@@ -1,4 +1,9 @@
-module.exports = class AudioPlayerDirective {
+
+/*
+AudioPlayerDirective를 Build해주는 DTO
+*/
+
+class AudioPlayerDirective {
     constructor() {
         this.type = 'AudioPlayer.Play'
         this.audioItem = {
@@ -15,34 +20,51 @@ module.exports = class AudioPlayerDirective {
             'metadata': {}
         }
     }
+}
+//외부에서 여러 빌드를 사용해야하므로 정확히 구분하는 Class Name
+//JS 내부 클래스 불가능
+module.exports = class AudioPlayerDirectiveBuilder {
 
-    // audio.directiveType('type');
-    // audo.directiveType =  'type'; -> set으로 했을경우
-    set directiveType(type) {
-        this.type = type;
+    constructor() {
+        this.audioPlayerDirective = new AudioPlayerDirective();
     }
 
-    set directiveUrl(url) {
-        this.audioItem.stream.url = url;
+    directiveType(type) {
+        this.audioPlayerDirective.type = type;
+        return this;
     }
 
-    set directiveOffset(offset) {
-        this.audioItem.stream.offsetInMilliseconds = offset;
+    directiveUrl(url) {
+        this.audioPlayerDirective.audioItem.stream.url = url;
+        return this;
     }
 
-    set directiveDelay(delay) {
-        this.audioItem.stream.progressReport.progressReportDelayInMilliseconds = delay;
+    directiveOffset(offset) {
+        this.audioPlayerDirective.audioItem.stream.offsetInMilliseconds = offset;
+        return this;
     }
 
-    set directiveInterval(interval) {
-        this.audioItem.stream.progressReport.progressReportIntervalInMilliseconds = interval;
+    directiveDelay(delay) {
+        this.audioPlayerDirective.audioItem.stream.progressReport.progressReportDelayInMilliseconds = delay;
+        return this;
     }
 
-    set directiveToken(token) {
-        this.audioItem.stream.token = token;
+    directiveInterval(interval) {
+        this.audioPlayerDirective.audioItem.stream.progressReport.progressReportIntervalInMilliseconds = interval;
+        return this;
     }
 
-    set directivePreviousToken(previousToken) {
-        this.audioItem.stream.expectedPreviousToken = previousToken;
+    directiveToken(token) {
+        this.audioPlayerDirective.audioItem.stream.token = token;
+        return this;
+    }
+
+    directivePreviousToken(previousToken) {
+        this.audioPlayerDirective.audioItem.stream.expectedPreviousToken = previousToken;
+        return this;
+    }
+    
+    build(){
+        return this.audioPlayerDirective
     }
 }

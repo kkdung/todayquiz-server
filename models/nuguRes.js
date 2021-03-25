@@ -16,10 +16,9 @@ class NuguRes {
 
 }
 
-module.exports = class Builder {
+module.exports = class NuguResBuilder {
   constructor() {
-    //여기디스
-    this.nuguRes = new nuguRes();
+    this.nuguRes = new NuguRes();
   }
 
   version(version) {
@@ -42,6 +41,9 @@ module.exports = class Builder {
 
   //Interface를 사용하는 경우 directive 추가
   addDirective(directive){
+    /*
+    Directive 관련 함수 - 필요한 Directive list 구조
+    */
     //audio interface, display interface 어디서 처리할지 체크해보기
     //여기하면 안되고 의존성 주입처럼 외부에서 처리해야함.
     //인터페이스 템플릿 추가될 경우 directiv model 추가하고 외부에서 주입해주면 된디.
@@ -51,9 +53,8 @@ module.exports = class Builder {
   
   build(){ 
     return this.nuguRes;
-
   }
 }
-//https://dev-momo.tistory.com/entry/%EB%B9%8C%EB%8D%94-%ED%8C%A8%ED%84%B4-Builder-Pattern
+//reference : https://dev-momo.tistory.com/entry/%EB%B9%8C%EB%8D%94-%ED%8C%A8%ED%84%B4-Builder-Pattern
       
        

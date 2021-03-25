@@ -13,7 +13,9 @@ module.exports = class NuguReq {
         this.deviceState = req.body.context.device.state;
         //this.response = new Response(this.version);
 
-        if (Object.keys(req.body.context.supportedInterfaces).length !== 0) {
+        //fix : lenth check ->         Object.keys(object_1).includes('test_1')
+ 
+        if (Object.keys(req.body.context.supportedInterface).includes('AudioPlayer')) {
             this.audioPlayer = req.body.context.supportedInterfaces.AudioPlayer;
             if(this.audioPlayer){
                 this.audioPlayerActivity = this.audioPlayer.playerActivity;
@@ -21,7 +23,27 @@ module.exports = class NuguReq {
                 this.audioOffset = this.audioPlayer.offsetInMilliseconds;
             }
         }
+     
+
+        if (Object.keys(req.body.context.supportedInterface).includes('Display')) {
+        /* Display resquest smaple
+        "Display": {
+            "version": "1.0",
+            "playServiceId": "{{STRING}}",
+            "token": "{{STRING}}"
+        }
+        */
+            this.display = req.body.context.supportedInterfaces.display;
+            if(this.display){
+                this.displayVersion = this.display.version;
+                this.displayPlayServiceId = this.display.playServiceId;
+                this.displayToken = this.display.token;
+            }
+        }
+
     }
+
+    
 
     getValue(value) {
         if (this.parameters[value] === undefined) {
@@ -36,4 +58,5 @@ module.exports = class NuguReq {
         }
         return this.parameters[value].type;
     }
+   
 }

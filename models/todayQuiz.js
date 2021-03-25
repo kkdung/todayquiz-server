@@ -28,9 +28,11 @@ try {
             break;//insert
         }
     }
-
+ 
+    
 } catch (e) {
-    e.resultCode = process.env.SERVER_CHECK
+    //이거 동작여부 확인
+    //e.resultCode = process.env.SERVER_CHECK
     throw e;
 }
 
