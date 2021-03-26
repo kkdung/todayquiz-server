@@ -15,31 +15,31 @@ module.exports = class NuguReq {
 
         //fix : lenth check ->         Object.keys(object_1).includes('test_1')
  
-        if (Object.keys(req.body.context.supportedInterface).includes('AudioPlayer')) {
-            this.audioPlayer = req.body.context.supportedInterfaces.AudioPlayer;
-            if(this.audioPlayer){
-                this.audioPlayerActivity = this.audioPlayer.playerActivity;
-                this.audioToken = this.audioPlayer.token;
-                this.audioOffset = this.audioPlayer.offsetInMilliseconds;
-            }
-        }
+        // if (Object.keys(req.body.context.supportedInterface).includes('AudioPlayer')) {
+        //     this.audioPlayer = req.body.context.supportedInterfaces.AudioPlayer;
+        //     if(this.audioPlayer){
+        //         this.audioPlayerActivity = this.audioPlayer.playerActivity;
+        //         this.audioToken = this.audioPlayer.token;
+        //         this.audioOffset = this.audioPlayer.offsetInMilliseconds;
+        //     }
+        // }
      
 
-        if (Object.keys(req.body.context.supportedInterface).includes('Display')) {
-        /* Display resquest smaple
-        "Display": {
-            "version": "1.0",
-            "playServiceId": "{{STRING}}",
-            "token": "{{STRING}}"
-        }
-        */
-            this.display = req.body.context.supportedInterfaces.Display;
-            if(this.display){
-                this.displayVersion = this.display.version;
-                this.displayPlayServiceId = this.display.playServiceId;
-                this.displayToken = this.display.token;
-            }
-        }
+        // if (Object.keys(req.body.context.supportedInterface).includes('Display')) {
+        // /* Display resquest smaple
+        // "Display": {
+        //     "version": "1.0",
+        //     "playServiceId": "{{STRING}}",
+        //     "token": "{{STRING}}"
+        // }
+        // */
+        //     this.display = req.body.context.supportedInterfaces.Display;
+        //     if(this.display){
+        //         this.displayVersion = this.display.version;
+        //         this.displayPlayServiceId = this.display.playServiceId;
+        //         this.displayToken = this.display.token;
+        //     }
+        // }
 
     }
 

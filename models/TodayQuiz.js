@@ -13,7 +13,7 @@ try {
     const yearMonth = moment().format('YYYYMM');
 
     // today quiz
-    const today_sheets = XLSX.readFile(`./rsc/today/${yearMonth}_revoicequizlist.xlsx`,
+    const today_sheets = XLSX.readFile(`./resource/quiz/${yearMonth}_revoicequizlist.xlsx`,
         { dateNF: 'yyyy-mm-dd', cellDates: true, encoding: 'utf8' }
     );
     const today_sheet1 = XLSX.utils.sheet_to_row_object_array(

@@ -12,9 +12,13 @@ async function common_start(nuguReq) {
     /*
     퀴즈 시작함수
     */
+    //console.log(nuguReq)
     try {
 
         todayQuiz = new TodayQuiz();
+        //console.log(todayQuiz)
+      
+        
         let open_ment = { "nugu_common_openment" : `${todayQuiz.openment} ${todayQuiz.sound_comment}`};
         
         let audioPlayerDirective = new AudioPlayerDirectiveBuilder()
@@ -22,16 +26,24 @@ async function common_start(nuguReq) {
             .directiveUrl(`https://www.inseop.pe.kr/music/${todayQuiz.sound}.mp3`)
             .directiveToken('quiz_sound')
             .build();
+        
+        
+            //얘는 잘 들어감 
+        //console.log(`https://www.inseop.pe.kr/music/${todayQuiz.sound}.mp3`)
+        
+        //console.log(typeof todayQuiz.question)
+        //console.log(todayQuiz.question)
 
+        
         let displayDirective = new DisplayDirectiveBuilder()
         .directiveType('Display.FullText1')
         .directiveVersion(nuguReq.displayVersion)
         .directivePlayServiceId(nuguReq.displayPlayServiceId)
         .directiveToken("DisplayToken")
-        .directiveTitleUrl("이미지파일URL")
+        .directiveTitleUrl("http://140.238.11.119/todayquiz_logo_50.png")
         .directiveTitleText("오늘의 퀴즈")
         .directiveContentHearderText("오늘의 퀴즈를 알려드릴게요.")
-        .directiveContentBodyText(`${todayQuiz.question}`)
+        .directiveContentBodyText("하이하이")
         .directiveContentFooterText(`1번 : ${todayQuiz.choice1}    2번 : ${todayQuiz.choice2}    3번 : ${todayQuiz.choice3}    4번 : ${todayQuiz.choice4} \n정답을 숫자로 말씀해주세요.`)
         .build()
                 
@@ -225,6 +237,9 @@ module.exports = (req, res) => {
         }
     }
     catch (e) {
+
+        console.log("캐치안에 에러가 나버렸다능")
+        console.log(e)
         console.log(`\n${e.stack}`);
         nuguReq.resultCode = e.resultCode;
     } finally {

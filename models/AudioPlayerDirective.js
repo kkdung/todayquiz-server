@@ -26,6 +26,7 @@ class AudioPlayerDirective {
 module.exports = class AudioPlayerDirectiveBuilder {
 
     constructor() {
+        //this차이
         this.audioPlayerDirective = new AudioPlayerDirective();
     }
 
