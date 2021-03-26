@@ -9,10 +9,10 @@ class DisplayDirective {
         this.version = version
         this.playServiceId = ""
         this.token = "";
-        this.duration = "";
+        // this.duration = "";
         this.title = {
             "logo": {
-                "contentDescription": "{{contentDescription}}",
+                //"contentDescription": "{{contentDescription}}",
                 "sources": [
                     {
                         "url": "http://someurl.com/name.png"
@@ -24,18 +24,18 @@ class DisplayDirective {
             }
         }
 
-        this.background = {
-            "image": {
-                "contentDescription": "{{STRING}}",
-                "sources": [
-                    {
-                        "url": "http://someurl.com/name.png",
-                        "size": "LARGE"
-                    }
-                ]
-                },
-            "color": ""
-            }
+        // this.background = {
+        //     "image": {
+        //         "contentDescription": "{{STRING}}",
+        //         "sources": [
+        //             {
+        //                 "url": "http://someurl.com/name.png",
+        //                 "size": "LARGE"
+        //             }
+        //         ]
+        //         },
+        //     "color": ""
+        //     }
 
         this.content = {
             "header": {
@@ -77,10 +77,10 @@ module.exports = class DisplayDirectiveBuilder {
         return this;
     }
     
-    directiveDuration(duration) {
-        this.displayDirective.duration = duration;
-        return this;
-    }
+    // directiveDuration(duration) {
+    //     this.displayDirective.duration = duration;
+    //     return this;
+    // }
 
     directiveTitleContentDescription(contentDescription) {
         this.displayDirective.title.logo.contentDescription = contentDescription;
@@ -100,29 +100,29 @@ module.exports = class DisplayDirectiveBuilder {
         return this;
     }
 
-    directiveBackgroundContentDescription(contentDescription) {
-        this.displayDirective.background.image.contentDescription = contentDescription;
-        return this;
-    }
+    // directiveBackgroundContentDescription(contentDescription) {
+    //     this.displayDirective.background.image.contentDescription = contentDescription;
+    //     return this;
+    // }
 
-    directiveBackgroundUrl(url) {
-        this.displayDirective.background.image.sources[0].url = url;
-        return this;
-    }
+    // directiveBackgroundUrl(url) {
+    //     this.displayDirective.background.image.sources[0].url = url;
+    //     return this;
+    // }
     
-    directiveBackgroundSize(size) {
-        this.displayDirective.background.image.sources[0].size = size;
-        return this;
-    }
+    // directiveBackgroundSize(size) {
+    //     this.displayDirective.background.image.sources[0].size = size;
+    //     return this;
+    // }
     
-    directiveBackgroundSize(size) {
-        this.displayDirective.background.image.sources[0].size = size;
-        return this;
-    }
+    // directiveBackgroundSize(size) {
+    //     this.displayDirective.background.image.sources[0].size = size;
+    //     return this;
+    // }
     
-    directiveBackgroundColer(color) {
-        this.displayDirective.background.color = color;
-    }
+    // directiveBackgroundColer(color) {
+    //     this.displayDirective.background.color = color;
+    // }
 
     directiveContentHearderText(text) {
         this.displayDirective.content.header.text = text;

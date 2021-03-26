@@ -33,7 +33,7 @@ module.exports = class NuguReq {
             "token": "{{STRING}}"
         }
         */
-            this.display = req.body.context.supportedInterfaces.display;
+            this.display = req.body.context.supportedInterfaces.Display;
             if(this.display){
                 this.displayVersion = this.display.version;
                 this.displayPlayServiceId = this.display.playServiceId;
@@ -42,8 +42,6 @@ module.exports = class NuguReq {
         }
 
     }
-
-    
 
     getValue(value) {
         if (this.parameters[value] === undefined) {

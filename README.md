@@ -90,33 +90,56 @@ NUGU의 Post요청을 구분해 경로를 지정하는 라우터 코드입니다
 요청에는 Requset Body에 JSON형식으로 요청 관련된 데이터가 서버로 요청됩니다. 그럼 백엔드 서버에서는 해당 요청을 처리해 Response를 만들어 응답해야합니다.
 
 ```javascript
-module.exports = (req, res) => {
-  	//NUGU Request 파싱(Required)
-    req.nugu = {
-        version : req.body.version,
-        actionName : req.body.action.actionName,
-        parameters : req.body.action.parameters,
-        event : req.body.event,
-        context : req.body.context,
-        accessToken : req.body.context.session.accessToken,
-        sessionId : req.body.context.session.id,
-        isNew : req.body.context.session.isNew,
-        isPlayBuilderRequest : req.body.context.session.isPlayBuilderRequest,
-        deviceType : req.body.context.device.type,
-        deviceState : req.body.context.device.state,
-    }
+module.exports = class NuguReq {
+    constructor(req) {
+        this.version = req.body.version;
+        this.actionName = req.body.action.actionName;
+        this.parameters = req.body.action.parameters;
+        this.event = req.body.event;
+        this.context = req.body.context;
+        this.accessToken = req.body.context.session.accessToken;
+        this.sessionId = req.body.context.session.id;
+        this.isNew = req.body.context.session.isNew;
+        this.isPlayBuilderRequest = req.body.context.session.isPlayBuilderRequest;
+        this.deviceType = req.body.context.device.type;
+        this.deviceState = req.body.context.device.state;
   
-    //NUGU 추가 인터페이스 Req 파싱(Optional)
-    if (Object.keys(req.body.context.supportedInterfaces).length !== 0) {    
-        audioPlayer = req.body.context.supportedInterfaces.AudioPlayer
-        //req.audioPlayer에 추가한다.
-        req.nugu.audioPlayer = {
-            audioPlayerActivity : audioPlayer.playerActivity,
-            audioToken : audioPlayer.token,
-            audioOffsetInMilliseconds : audioPlayer.offsetInMilliseconds
-        } 
+        if (Object.keys(req.body.context.supportedInterface).includes('AudioPlayer')) {
+            this.audioPlayer = req.body.context.supportedInterfaces.AudioPlayer;
+            if(this.audioPlayer){
+                this.audioPlayerActivity = this.audioPlayer.playerActivity;
+                this.audioToken = this.audioPlayer.token;
+                this.audioOffset = this.audioPlayer.offsetInMilliseconds;
+            }
+        }
+     
+        if (Object.keys(req.body.context.supportedInterface).includes('Display')) {
+            this.display = req.body.context.supportedInterfaces.display;
+            if(this.display){
+                this.displayVersion = this.display.version;
+                this.displayPlayServiceId = this.display.playServiceId;
+                this.displayToken = this.display.token;
+            }
+        }
     }
+
+
+    getValue(value) {
+        if (this.parameters[value] === undefined) {
+            return undefined
+        }
+        return this.parameters[value].value;
+    }
+
+    getValueType(value) {
+        if (this.parameters[value] === undefined) {
+            return undefined
+        }
+        return this.parameters[value].type;
+    }
+   
 }
+
 ```
 
 

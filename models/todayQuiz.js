@@ -49,6 +49,7 @@ module.exports = class TodayQuiz{
 
         this.opement = today_cell["OPENMENT"]
         this.sound = today_cell["SOUND"]
+        this.sound_comment = today_cell["SOUND_COMMENT"]
         this.question = today_cell["QUESTION"]
         this.choice1 = today_cell["CHOICE1"]
         this.choice2 = today_cell["CHOICE2"]
