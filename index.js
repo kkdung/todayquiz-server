@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express');
 const router = require('./routes/router');
-const nuguReq = require('./models/nugu_request.js');
 const app = express();
 //4.16이후 버전 부터는 expres.json()으로 bodyparser내장
 app.use(express.json());
