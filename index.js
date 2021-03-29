@@ -14,13 +14,12 @@ app.get('/todayquiz/health', (req, res) => {
 
 app.use('/todayquiz', router);
 
-//
-// app.use(function (err, req, res, next) {
-//     console.error(err.message);
-//     res.status(err.status).send(err.message);
-// });
+app.use(function (err, req, res, next) {
+    console.error(err.message);
+    res.status(err.status).send(err.message);
+});
 
 //port listening
-app.listen(process.env.PORT), () => {
+app.listen((process.env.PORT), () => {
     console.log(`tdadayQuiz app listening on port : ${process.env.PORT}`)
-}
+});

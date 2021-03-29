@@ -38,16 +38,15 @@ try {
 
 module.exports = class TodayQuiz{
     constructor() {
-
-        if(today_cell["OPENMENT"]===undefined) { 
-            today_cell["OPENMENT"]=""
+        if(today_cell["OPENMENT"]=== undefined) { 
+            today_cell["OPENMENT"]=" "
         }
 
         if(today_cell["SOUND_COMMENT"]===undefined) {
-            today_cell["SOUND_COMMENT"]="" 
+            today_cell["SOUND_COMMENT"]=" " 
         }
 
-        this.opement = today_cell["OPENMENT"]
+        this.openment = today_cell["OPENMENT"]
         this.sound = today_cell["SOUND"]
         this.sound_comment = today_cell["SOUND_COMMENT"]
         this.question = today_cell["QUESTION"]
@@ -57,6 +56,7 @@ module.exports = class TodayQuiz{
         this.choice4 = today_cell["CHOICE4"]
         this.correct = today_cell["CORRECT"]
         this.commentary = today_cell["COMMENTARY"]
+
     }
 
 }

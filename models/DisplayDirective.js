@@ -6,7 +6,7 @@ class DisplayDirective {
 
     constructor() {
         this.type = "Display.FullText1"
-        this.version = 
+        this.version = ""
         this.playServiceId = ""
         this.token = "";
         // this.duration = "";
@@ -127,22 +127,21 @@ module.exports = class DisplayDirectiveBuilder {
     // }
 
     directiveContentHearderText(text) {
-        console.log("대가리")
-        console.log(text)
-        console.log("가 언디파인드라니!헤더")
-
         this.displayDirective.content.header.text = text;
-        console.log(this.displayDirective.content.header.text)
+        return this;
+    
     }
 
     directiveContentBodyText(text) {
-        console.log("실행은되냐?")
-        console.log(text)
         this.displayDirective.content.body.text = text;
+        return this;
+    
     }
 
     directiveContentFooterText(text) {
         this.displayDirective.content.footer.text = text;
+        return this;
+    
     }
 
     build() {
