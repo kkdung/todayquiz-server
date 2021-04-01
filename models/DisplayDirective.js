@@ -45,12 +45,11 @@ class DisplayDirective {
                 "text": "‘독도’는 동해의 남서부인 울릉도와 오키 제도 사이에 있는 섬으로, 동도와 서도를 포함하고 총 91개의 섬들로 이루어져 있습니다."
             },    
             "footer": {
-                "text": "출처 : 위키피디아"
+                "text": " "
             }
         }
 
     }
-
 }
 
 module.exports = class DisplayDirectiveBuilder {
@@ -98,7 +97,6 @@ module.exports = class DisplayDirectiveBuilder {
     
     directiveTitleText(text) {
         this.displayDirective.title.text.text = text;
-        console.log(text)
         return this;
     }
 

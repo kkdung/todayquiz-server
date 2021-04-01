@@ -6,56 +6,62 @@ const e = require('express');
 const XLSX = require('xlsx');
 const moment = require('../config/moment');
 
-let today_cell = {}//insert 
+function getTodayQuiz() {
+    let today_cell = {}//insert 
 
-try {
-    const today = moment().format('D');
-    const yearMonth = moment().format('YYYYMM');
-
-    // today quiz
-    const today_sheets = XLSX.readFile(`./resource/quiz/${yearMonth}_revoicequizlist.xlsx`,
-        { dateNF: 'yyyy-mm-dd', cellDates: true, encoding: 'utf8' }
-    );
-    const today_sheet1 = XLSX.utils.sheet_to_row_object_array(
-        today_sheets.Sheets['Sheet1'],
-        { raw: false }
-    )
-
-    // find cell    
-    for (var i = 0; i < today_sheet1.length; i++) {
-        if (today_sheet1[i].DATE == today) {
-            today_cell = today_sheet1[i];
-            break;//insert
-        }
-    }
- 
+    try {
+        const today = moment().format('D');
+        const yearMonth = moment().format('YYYYMM');
     
-} catch (e) {
-    //이거 동작여부 확인
-    //e.resultCode = process.env.SERVER_CHECK
-    throw e;
+        // today quiz아주 
+        const today_sheets = XLSX.readFile(`./resource/quiz/${yearMonth}_revoicequizlist.xlsx`,
+            { dateNF: 'yyyy-mm-dd', cellDates: true, encoding: 'utf8' }
+        );
+        const today_sheet1 = XLSX.utils.sheet_to_row_object_array(
+            today_sheets.Sheets['Sheet1'],
+            { raw: false }
+        )
+    
+        // find cell    
+        for (var i = 0; i < today_sheet1.length; i++) {
+            if (today_sheet1[i].DATE == today) {
+                today_cell = today_sheet1[i];
+                break;//insert
+            }
+        }
+     
+        return today_cell;
+
+    } catch (e) {
+        //이거 동작여부 확인
+        //e.resultCode = process.env.SERVER_CHECK
+        throw e;
+    }
 }
 
 module.exports = class TodayQuiz{
     constructor() {
-        if(today_cell["OPENMENT"]=== undefined) { 
-            today_cell["OPENMENT"]=" "
+
+        this.today_cell = getTodayQuiz();
+        
+        if(this.today_cell["OPENMENT"]=== undefined) { 
+            this.today_cell["OPENMENT"]=" "
         }
 
-        if(today_cell["SOUND_COMMENT"]===undefined) {
-            today_cell["SOUND_COMMENT"]=" " 
+        if(this.today_cell["SOUND_COMMENT"]===undefined) {
+            this.today_cell["SOUND_COMMENT"]=" " 
         }
 
-        this.openment = today_cell["OPENMENT"]
-        this.sound = today_cell["SOUND"]
-        this.sound_comment = today_cell["SOUND_COMMENT"]
-        this.question = today_cell["QUESTION"]
-        this.choice1 = today_cell["CHOICE1"]
-        this.choice2 = today_cell["CHOICE2"]
-        this.choice3 = today_cell["CHOICE3"]
-        this.choice4 = today_cell["CHOICE4"]
-        this.correct = today_cell["CORRECT"]
-        this.commentary = today_cell["COMMENTARY"]
+        this.openment = this.today_cell["OPENMENT"]
+        this.sound = this.today_cell["SOUND"]
+        this.sound_comment = this.today_cell["SOUND_COMMENT"]
+        this.question = this.today_cell["QUESTION"]
+        this.choice1 = this.today_cell["CHOICE1"]
+        this.choice2 = this.today_cell["CHOICE2"]
+        this.choice3 = this.today_cell["CHOICE3"]
+        this.choice4 = this.today_cell["CHOICE4"]
+        this.correct = this.today_cell["CORRECT"]
+        this.commentary = this.today_cell["COMMENTARY"]
 
     }
 

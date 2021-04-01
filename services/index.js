@@ -30,9 +30,9 @@ function common_start(nuguReq) {
         .directiveToken("DisplayToken")
         .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
         .directiveTitleText("오늘의 퀴즈")
-        .directiveContentHearderText("오늘의 퀴즈를 알려드릴게요.")
-        .directiveContentBodyText(`${todayQuiz.question} \n\n(1) : ${todayQuiz.choice1}\n(2) : ${todayQuiz.choice2}\n(3) : ${todayQuiz.choice3}\n(4) : ${todayQuiz.choice4}\n`)
-        .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
+        .directiveContentHearderText("안녕하세요. 오늘의 퀴즈입니다.")
+        .directiveContentBodyText(`${todayQuiz.openment} ${todayQuiz.sound_comment}`)
+        .directiveContentFooterText(`잠시 후 퀴즈가 나갑니다.`)
         .build()
                 
         nuguRes = new NuguResBuilder()
