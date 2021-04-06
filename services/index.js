@@ -12,6 +12,8 @@ function common_start(nuguReq) {
     /*
     퀴즈 시작함수
     */
+    console.log(JSON.stringify(nuguReq, null, 4));
+        
     try {
         todayQuiz = new TodayQuiz();
 
@@ -22,6 +24,8 @@ function common_start(nuguReq) {
             .directiveUrl(`https://www.inseop.pe.kr/music/${todayQuiz.sound}.mp3`)
             .directiveToken('quiz_sound')
             .build();
+        
+    
         
         let displayDirective = new DisplayDirectiveBuilder()
         .directiveType('Display.FullText1')
@@ -34,6 +38,7 @@ function common_start(nuguReq) {
         .directiveContentBodyText(`${todayQuiz.openment} ${todayQuiz.sound_comment}`)
         .directiveContentFooterText(`잠시 후 퀴즈가 나갑니다.`)
         .build()
+        
                 
         nuguRes = new NuguResBuilder()
         .version(nuguReq.version)
@@ -53,39 +58,6 @@ function common_start(nuguReq) {
     }
 }
 
-function openQuiz(nuguReq) {
-    try {
-
-        todayQuiz = new TodayQuiz();
-        let open_ment = { "nugu_openment" : `${todayQuiz.openment} ${todayQuiz.sound_comment}`};
-        
-        let displayDirective = new DisplayDirectiveBuilder()
-        .directiveType('Display.FullText1')
-        .directiveVersion(nuguReq.displayVersion)
-        .directivePlayServiceId(nuguReq.sessionId)
-        .directiveToken("DisplayToken")
-        .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
-        .directiveTitleText("오늘의 퀴즈")
-        .directiveContentHearderText("오늘의 퀴즈를 알려드릴게요.")
-        .directiveContentBodyText(`${todayQuiz.question} \n\n(1) : ${todayQuiz.choice1}\n(2) : ${todayQuiz.choice2}\n(3) : ${todayQuiz.choice3}\n(4) : ${todayQuiz.choice4}\n`)
-        .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
-        .build()
-                
-        nuguRes = new NuguResBuilder()
-        .version(nuguReq.version)
-        .resultCode('OK')
-        .output(open_ment)
-        .addDirective(audioPlayerDirective)
-        .addDirective(displayDirective)
-        .build();
-
-        //console.dir(nuguRes,{depth:null})
-        return nuguRes
-
-    } catch (e) {
-        throw e;
-    }
-}
 
 function answerQuiz(nuguReq) {
     /*
@@ -156,17 +128,36 @@ function quizSound(nuguReq) {
     todayQuiz = new TodayQuiz();
     let nugu_todayquiz = {'nugu_todayquiz' : ` ${todayQuiz.question}. 1번, ${todayQuiz.choice1}. 2번, ${todayQuiz.choice2}. 3번, ${todayQuiz.choice3}. 4번, ${todayQuiz.choice4}. `};
     
-    let displayDirective = new DisplayDirectiveBuilder()
-    .directiveType('Display.FullText1')
-    .directiveVersion(nuguReq.displayVersion)
-    .directivePlayServiceId(nuguReq.sessionId)
-    .directiveToken("DisplayToken")
-    .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
-    .directiveTitleText("오늘의 퀴즈")
-    .directiveContentHearderText("오늘의 퀴즈를 알려드릴게요.")
-    .directiveContentBodyText(`${todayQuiz.question} \n\n(1) : ${todayQuiz.choice1}\n(2) : ${todayQuiz.choice2}\n(3) : ${todayQuiz.choice3}\n(4) : ${todayQuiz.choice4}\n`)
-    .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
-    .build()
+    //T전화 디바이스 타입
+    let displayDirective
+    
+    if (nuguReq.deviceType == "app.nugu.agent"){
+        displayDirective = new DisplayDirectiveBuilder()
+        .directiveType('Display.FullText1')
+        .directiveVersion(nuguReq.displayVersion)
+        .directivePlayServiceId(nuguReq.sessionId)
+        .directiveToken("DisplayToken")
+        .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
+        .directiveTitleText("오늘의 퀴즈")
+        .directiveContentHearderText("오늘의 퀴즈를 알려드릴게요.")
+        .directiveContentBodyText(`${todayQuiz.question} \n\n1번. ${todayQuiz.choice1}\n2번. ${todayQuiz.choice2}\n3번. ${todayQuiz.choice3}\n4번. ${todayQuiz.choice4}\n`)
+        .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
+        .build()
+
+    }
+    else {
+        displayDirective = new DisplayDirectiveBuilder()
+        .directiveType('Display.FullText1')
+        .directiveVersion(nuguReq.displayVersion)
+        .directivePlayServiceId(nuguReq.sessionId)
+        .directiveToken("DisplayToken")
+        .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
+        .directiveTitleText("오늘의 퀴즈")
+        .directiveContentHearderText("오늘의 퀴즈를 알려드릴게요.")
+        .directiveContentBodyText(`${todayQuiz.question}\n\n1번 ${todayQuiz.choice1}, 2번 ${todayQuiz.choice2}, 3번 ${todayQuiz.choice3}, 4번 ${todayQuiz.choice4}`)
+        .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
+        .build()
+    }
 
     nuguRes = new NuguResBuilder()
     .version(nuguReq.version)
@@ -181,18 +172,34 @@ function quizSound(nuguReq) {
 function repeat_answerstate(nuguReq) {
     todayQuiz = new TodayQuiz();
     let repeat_todayquiz = {'repeat_todayquiz' : `네, 문제를 다시 들려드릴게요. ${todayQuiz.question}. 1번, ${todayQuiz.choice1}. 2번, ${todayQuiz.choice2}. 3번, ${todayQuiz.choice3}. 4번, ${todayQuiz.choice4}. `};
+    
+    if (nuguReq.deviceType == "app.nugu.agent"){
+        let displayDirective = new DisplayDirectiveBuilder()
+        .directiveType('Display.FullText1')
+        .directiveVersion(nuguReq.displayVersion)
+        .directivePlayServiceId(nuguReq.sessionId)
+        .directiveToken("DisplayToken")
+        .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
+        .directiveTitleText("오늘의 퀴즈")
+        .directiveContentHearderText("네, 문제를 다시 알려드릴게요.")
+        .directiveContentBodyText(`${todayQuiz.question} \n\n1번. ${todayQuiz.choice1}\n2번. ${todayQuiz.choice2}\n3번. ${todayQuiz.choice3}\n4번. ${todayQuiz.choice4}\n`)
+        .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
+        .build()
+    }
+    else {
+        let displayDirective = new DisplayDirectiveBuilder()
+        .directiveType('Display.FullText1')
+        .directiveVersion(nuguReq.displayVersion)
+        .directivePlayServiceId(nuguReq.sessionId)
+        .directiveToken("DisplayToken")
+        .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
+        .directiveTitleText("오늘의 퀴즈")
+        .directiveContentHearderText("네, 문제를 다시 알려드릴게요.")
+        .directiveContentBodyText(`${todayQuiz.question}\n\n1번 ${todayQuiz.choice1}, 2번 ${todayQuiz.choice2}, 3번 ${todayQuiz.choice3}, 4번 ${todayQuiz.choice4}`)
+        .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
+        .build()
+    }
 
-    let displayDirective = new DisplayDirectiveBuilder()
-    .directiveType('Display.FullText1')
-    .directiveVersion(nuguReq.displayVersion)
-    .directivePlayServiceId(nuguReq.sessionId)
-    .directiveToken("DisplayToken")
-    .directiveTitleUrl("https://www.inseop.pe.kr/logo/todayquiz_logo.png")
-    .directiveTitleText("오늘의 퀴즈")
-    .directiveContentHearderText("네, 문제를 다시 알려드릴게요.")
-    .directiveContentBodyText(`${todayQuiz.question} \n\n(1) : ${todayQuiz.choice1}\n(2) : ${todayQuiz.choice2}\n(3) : ${todayQuiz.choice3}\n(4) : ${todayQuiz.choice4}\n`)
-    .directiveContentFooterText(`정답을 숫자로 말씀해주세요.`)
-    .build()
 
     nuguRes = new NuguResBuilder()
     .version(nuguReq.version)
@@ -216,9 +223,6 @@ module.exports = (req, res) => {
         switch (nuguReq.actionName) {
             case 'common_start':    
                 return res.json(common_start(nuguReq));
-
-            case 'openQuiz':
-                return res.json(openQuiz(nuguReq));
 
             case 'repeat_answerstate':
                 return res.json(repeat_answerstate(nuguReq));
