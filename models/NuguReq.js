@@ -47,6 +47,13 @@ module.exports = class NuguReq {
         if (this.parameters[value] === undefined) {
             return undefined
         }
+        //TodayQuiz에만 적용 정답길이가 1 이상일 경우 substirng
+        //예시 : "1번 1번 "  -> 1|1로 값이 넘어옴
+
+        if (this.parameters[value].value.length >= 2){
+            console.log(this.parameters[value].value.substr(0,1))
+            return this.parameters[value].value.substr(0,1);
+        }
         return this.parameters[value].value;
     }
 

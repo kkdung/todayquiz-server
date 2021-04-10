@@ -12,8 +12,6 @@ function common_start(nuguReq) {
     /*
     퀴즈 시작함수
     */
-    console.log(JSON.stringify(nuguReq, null, 4));
-        
     try {
         todayQuiz = new TodayQuiz();
 
@@ -63,6 +61,9 @@ function answerQuiz(nuguReq) {
     /*
     User의 Answer와 Quiz Correct의 일치를 확인후 정답 /오답 Prompt를 담는다.
     */
+
+    console.log(JSON.stringify(nuguReq, null, 4));
+    
     todayQuiz = new TodayQuiz();
     const userAnswer = nuguReq.getValue("userAnswer");
     let answerMent = {};
@@ -129,8 +130,7 @@ function quizSound(nuguReq) {
     let nugu_todayquiz = {'nugu_todayquiz' : ` ${todayQuiz.question}. 1번, ${todayQuiz.choice1}. 2번, ${todayQuiz.choice2}. 3번, ${todayQuiz.choice3}. 4번, ${todayQuiz.choice4}. `};
     
     //T전화 디바이스 타입
-    let displayDirective
-    
+    let displayDirective = {}
     if (nuguReq.deviceType == "app.nugu.agent"){
         displayDirective = new DisplayDirectiveBuilder()
         .directiveType('Display.FullText1')
@@ -173,8 +173,9 @@ function repeat_answerstate(nuguReq) {
     todayQuiz = new TodayQuiz();
     let repeat_todayquiz = {'repeat_todayquiz' : `네, 문제를 다시 들려드릴게요. ${todayQuiz.question}. 1번, ${todayQuiz.choice1}. 2번, ${todayQuiz.choice2}. 3번, ${todayQuiz.choice3}. 4번, ${todayQuiz.choice4}. `};
     
+    let displayDirective = {}
     if (nuguReq.deviceType == "app.nugu.agent"){
-        let displayDirective = new DisplayDirectiveBuilder()
+        displayDirective = new DisplayDirectiveBuilder()
         .directiveType('Display.FullText1')
         .directiveVersion(nuguReq.displayVersion)
         .directivePlayServiceId(nuguReq.sessionId)
@@ -187,7 +188,7 @@ function repeat_answerstate(nuguReq) {
         .build()
     }
     else {
-        let displayDirective = new DisplayDirectiveBuilder()
+        displayDirective = new DisplayDirectiveBuilder()
         .directiveType('Display.FullText1')
         .directiveVersion(nuguReq.displayVersion)
         .directivePlayServiceId(nuguReq.sessionId)
